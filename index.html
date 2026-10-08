@@ -1,27 +1,129 @@
-<!DOCTYPE html> <html lang="id"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>CV Online - Rido Al Fajar</title>
+<!DOCTYPE html> <html lang="id"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>CV - Rido Al Fajar</title>
 
 <!-- Bootstrap CSS CDN --> <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
 
 <!-- Bootstrap Icons CDN --> <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
 
-<style> body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f5f7fa; color: #212529; }
+<style> body { font-family: Arial, sans-serif; background-color: #f5f7fa; color: #212529; }
 
-/* Navbar */ .navbar { box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); }
+.hero { background: linear-gradient(135deg, #0d6efd, #084298); color: white; padding: 80px 0; }
 
-/* Hero */ .hero { min-height: 90vh; display: flex; align-items: center; background: linear-gradient( 135deg, #0d6efd 0%, #084298 100% ); color: white; }
+.profile-img { width: 160px; height: 160px; object-fit: cover; border: 5px solid white; }
 
-.profile-img { width: 180px; height: 180px; object-fit: cover; border: 6px solid rgba(255, 255, 255, 0.8); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); }
+.section-title { font-weight: bold; color: #0d6efd; margin-bottom: 30px; }
 
-.hero h1 { font-size: 3.5rem; font-weight: 700; }
+.card { border: none; border-radius: 15px; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08); }
 
-.hero .subtitle { font-size: 1.3rem; }
+.skill-badge { font-size: 14px; margin: 5px; padding: 10px 15px; }
 
-/* Section */ section { padding: 80px 0; }
+footer { background-color: #212529; color: white; } </style> </head>
 
-.section-title { font-weight: 700; color: #0d6efd; margin-bottom: 40px; }
+<body>
 
-.section-title::after { content: ""; display: block; width: 60px; height: 4px; background-color: #0d6efd; margin: 12px auto 0; border-radius: 10px; }
+<!-- Navbar --> <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top"> <div class="container"> <a class="navbar-brand fw-bold" href="#">Rido Al Fajar</a>
 
-/* Card */ .custom-card { border: none; border-radius: 15px; box-shadow: 0 8px 25px rgba(0, 0, 0,
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" > <span class="navbar-toggler-icon"></span> </button>
+
+<div class="collapse navbar-collapse" id="navbarNav"> <ul class="navbar-nav ms-auto"> <li class="nav-item"> <a class="nav-link" href="#tentang">Tentang</a> </li> <li class="nav-item"> <a class="nav-link" href="#pendidikan">Pendidikan</a> </li> <li class="nav-item"> <a class="nav-link" href="#skill">Skill</a> </li> <li class="nav-item"> <a class="nav-link" href="#kontak">Kontak</a> </li> </ul> </div> </div> </nav>
+
+<!-- Hero --> <section class="hero text-center"> <div class="container">
+
+<!-- Ganti src dengan foto kamu --> <img src="https://via.placeholder.com/160" alt="Foto Rido Al Fajar" class="profile-img rounded-circle mb-4" >
+
+<h1 class="display-4 fw-bold">Rido Al Fajar</h1>
+
+<p class="lead"> Mahasiswa Masoem University </p>
+
+<p> <i class="bi bi-geo-alt-fill"></i> Sumedang, Jawa Barat </p>
+
+<a href="#kontak" class="btn btn-light btn-lg mt-3"> Hubungi Saya </a> </div> </section>
+
+<!-- Tentang Saya --> <section id="tentang" class="py-5"> <div class="container"> <h2 class="section-title text-center">Tentang Saya</h2>
+
+<div class="card p-4"> <div class="row align-items-center">
+
+<div class="col-md-8"> <p class="lead"> Halo, saya <strong>Rido Al Fajar</strong>, mahasiswa di <strong>Masoem University</strong> yang berasal dari Sumedang, Jawa Barat. </p>
+
+<p> Saya memiliki ketertarikan dalam dunia teknologi, pengembangan website, dan pengembangan kemampuan diri. Saya senang mempelajari hal-hal baru serta berusaha meningkatkan kemampuan melalui berbagai pengalaman dan proyek. </p> </div>
+
+<div class="col-md-4 text-center"> <i class="bi bi-person-circle text-primary" style="font-size: 120px;"></i> </div>
+
+</div> </div> </div> </section>
+
+<!-- Pendidikan --> <section id="pendidikan" class="py-5 bg-white"> <div class="container"> <h2 class="section-title text-center">Pendidikan</h2>
+
+<div class="card p-4"> <div class="row">
+
+<div class="col-md-2 text-center"> <i class="bi bi-mortarboard-fill text-primary" style="font-size: 60px;"></i> </div>
+
+<div class="col-md-10"> <h4 class="fw-bold">Masoem University</h4>
+
+<p class="text-muted"> Mahasiswa </p>
+
+<p> Saat ini sedang menempuh pendidikan sebagai mahasiswa di Masoem University. </p> </div>
+
+</div> </div> </div> </section>
+
+<!-- Skill --> <section id="skill" class="py-5"> <div class="container"> <h2 class="section-title text-center">Skill & Kemampuan</h2>
+
+<div class="card p-4 text-center">
+
+<!-- Silakan ubah skill sesuai kemampuan kamu --> <span class="badge bg-primary skill-badge"> HTML </span>
+
+<span class="badge bg-primary skill-badge"> CSS </span>
+
+<span class="badge bg-primary skill-badge"> Bootstrap </span>
+
+<span class="badge bg-primary skill-badge"> JavaScript </span>
+
+<span class="badge bg-success skill-badge"> Microsoft Office </span>
+
+<span class="badge bg-secondary skill-badge"> Problem Solving </span>
+
+<span class="badge bg-info text-dark skill-badge"> Teamwork </span>
+
+</div> </div> </section>
+
+<!-- Pengalaman --> <section class="py-5 bg-white"> <div class="container"> <h2 class="section-title text-center">Pengalaman</h2>
+
+<div class="card p-4 text-center"> <i class="bi bi-briefcase-fill text-primary" style="font-size: 50px;"></i>
+
+<h4 class="mt-3">Pengalaman & Proyek</h4>
+
+<p class="text-muted"> Bagian ini dapat diisi dengan pengalaman organisasi, pekerjaan, magang, maupun proyek yang pernah dikerjakan. </p> </div> </div> </section>
+
+<!-- Kontak --> <section id="kontak" class="py-5"> <div class="container"> <h2 class="section-title text-center">Kontak</h2>
+
+<div class="card p-4"> <div class="row text-center">
+
+<div class="col-md-4 mb-4"> <i class="bi bi-geo-alt-fill text-primary" style="font-size: 40px;"></i>
+
+<h5 class="mt-2">Lokasi</h5>
+
+<p> Sumedang, Jawa Barat </p> </div>
+
+<div class="col-md-4 mb-4"> <i class="bi bi-envelope-fill text-primary" style="font-size: 40px;"></i>
+
+<h5 class="mt-2">Email</h5>
+
+<p> emailkamu@example.com </p> </div>
+
+<div class="col-md-4 mb-4"> <i class="bi bi-phone-fill text-primary" style="font-size: 40px;"></i>
+
+<h5 class="mt-2">Telepon</h5>
+
+<p> 08xxxxxxxxxx </p> </div>
+
+</div> </div> </div> </section>
+
+<!-- Footer --> <footer class="py-4 text-center"> <div class="container"> <p class="mb-0"> &copy; 2026 Rido Al Fajar. All Rights Reserved. </p>
+
+<div class="mt-2"> <a href="#" class="text-white me-3"> <i class="bi bi-instagram"></i> </a>
+
+<a href="#" class="text-white me-3"> <i class="bi bi-github"></i> </a>
+
+<a href="#" class="text-white"> <i class="bi bi-linkedin"></i> </a> </div> </div> </footer>
+
+<!-- Bootstrap JS CDN --> <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"> </script>
+
+</body> </html>
