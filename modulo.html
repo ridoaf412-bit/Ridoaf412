@@ -1,1 +1,258 @@
-kalkulator modulo
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Aritmatika Modular Interaktif</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 450px;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #666;
+            font-weight: 600;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        input:focus, select:focus {
+            outline: none;
+            border-color: #4ac29a;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4ac29a;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #3bb088;
+        }
+        .result-box {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #eef9f5;
+            border-left: 5px solid #4ac29a;
+            border-radius: 4px;
+            display: none;
+        }
+        .result-title {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        .result-value {
+            font-size: 18px;
+            color: #2c7a5f;
+            word-break: break-all;
+        }
+        .steps {
+            font-size: 14px;
+            color: #555;
+            margin-top: 10px;
+            white-space: pre-line;
+            border-top: 1px dashed #ccc;
+            padding-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Kalkulator Modular</h2>
+    
+    <div class="input-group">
+        <label for="numA">Angka Pertama (A)</label>
+        <input type="number" id="numA" placeholder="Masukkan angka A">
+    </div>
+
+    <div class="input-group">
+        <label for="operator">Operasi</label>
+        <select id="operator">
+            <option value="add">Penjumlahan (+)</option>
+            <option value="sub">Pengurangan (-)</option>
+            <option value="mul">Perkalian (×)</option>
+            <option value="pow">Perpangkatan (A^B)</option>
+            <option value="inv">Invers Perkalian Modulo (A^-1)</option>
+        </select>
+    </div>
+
+    <div class="input-group" id="groupB">
+        <label for="numB" id="labelB">Angka Kedua (B)</label>
+        <input type="number" id="numB" placeholder="Masukkan angka B">
+    </div>
+
+    <div class="input-group">
+        <label for="modulus">Modulus (N)</label>
+        <input type="number" id="modulus" placeholder="Masukkan nilai N (harus > 0)">
+    </div>
+
+    <button onclick="hitungModular()">Hitung</button>
+
+    <div class="result-box" id="resultBox">
+        <div class="result-title">Hasil:</div>
+        <div class="result-value" id="resultValue"></div>
+        <div class="steps" id="calcSteps"></div>
+    </div>
+</div>
+
+<script>
+    // Menyembunyikan input B jika memilih operasi Invers
+    document.getElementById('operator').addEventListener('change', function() {
+        const groupB = document.getElementById('groupB');
+        if (this.value === 'inv') {
+            groupB.style.display = 'none';
+        } else {
+            groupB.style.display = 'block';
+            if (this.value === 'pow') {
+                document.getElementById('labelB').innerText = 'Pangkat (B)';
+            } else {
+                document.getElementById('labelB').innerText = 'Angka Kedua (B)';
+            }
+        }
+    });
+
+    // Fungsi pencarian Invers Modular menggunakan Extended Euclidean Algorithm
+    function modInverse(a, m) {
+        let m0 = m;
+        let y = 0, x = 1;
+        if (m === 1) return 0;
+        
+        while (a > 1) {
+            if (m === 0) return null; // Proteksi pembagian nol
+            let q = Math.floor(a / m);
+            let t = m;
+            
+            m = a % m;
+            a = t;
+            t = y;
+            
+            y = x - q * y;
+            x = t;
+        }
+        if (x < 0) x += m0;
+        return a === 1 ? x : null;
+    }
+
+    // Fungsi modular exponentiation (A^B mod N) yang efisien
+    function powerMod(base, exp, mod) {
+        if (mod === 1) return 0;
+        let res = 1;
+        base = ((base % mod) + mod) % mod;
+        while (exp > 0) {
+            if (exp % 2 === 1) res = (res * base) % mod;
+            exp = Math.floor(exp / 2);
+            base = (base * base) % mod;
+        }
+        return res;
+    }
+
+    function hitungModular() {
+        const a = parseInt(document.getElementById('numA').value);
+        const b = parseInt(document.getElementById('numB').value);
+        const n = parseInt(document.getElementById('modulus').value);
+        const op = document.getElementById('operator').value;
+        
+        const resultBox = document.getElementById('resultBox');
+        const resultValue = document.getElementById('resultValue');
+        const calcSteps = document.getElementById('calcSteps');
+
+        // Validasi dasar
+        if (isNaN(a) || isNaN(n)) {
+            alert("Mohon masukkan Angka A dan Modulus N terlebih dahulu.");
+            return;
+        }
+        if (n <= 0) {
+            alert("Modulus (N) harus lebih besar dari 0.");
+            return;
+        }
+        if (op !== 'inv' && isNaN(b)) {
+            alert("Mohon masukkan Angka B.");
+            return;
+        }
+
+        let hasil;
+        let penjelasan = "";
+
+        // Standardisasi nilai A agar bernilai positif dalam range modulo N
+        let aMod = ((a % n) + n) % n;
+        let bMod = op !== 'inv' ? ((b % n) + n) % n : 0;
+
+        switch (op) {
+            case 'add':
+                hasil = (aMod + bMod) % n;
+                penjelasan = `(${a} + ${b}) mod ${n}\n= (${aMod} + ${bMod}) mod ${n}\n= ${aMod + bMod} mod ${n}\n= ${hasil}`;
+                break;
+            case 'sub':
+                hasil = (aMod - bMod) % n;
+                if (hasil < 0) hasil += n;
+                penjelasan = `(${a} - ${b}) mod ${n}\n= (${aMod} - ${bMod}) mod ${n}\n= ${aMod - bMod} mod ${n}\n= ${hasil}`;
+                break;
+            case 'mul':
+                hasil = (aMod * bMod) % n;
+                penjelasan = `(${a} × ${b}) mod ${n}\n= (${aMod} × ${bMod}) mod ${n}\n= ${aMod * bMod} mod ${n}\n= ${hasil}`;
+                break;
+            case 'pow':
+                if (b < 0) {
+                    alert("Untuk perpangkatan modular, pangkat (B) harus bernilai non-negatif.");
+                    return;
+                }
+                hasil = powerMod(a, b, n);
+                penjelasan = `${a}^${b} mod ${n} = ${hasil}\n(Menggunakan metode perpangkatan cepat/square-and-multiply)`;
+                break;
+            case 'inv':
+                let inv = modInverse(aMod, n);
+                if (inv === null) {
+                    hasil = "Tidak ada";
+                    penjelasan = `Invers dari ${a} mod ${n} tidak ada karena ${a} dan ${n} tidak saling prima (FPB ≠ 1).`;
+                } else {
+                    hasil = inv;
+                    penjelasan = `${a} × ${hasil} ≡ 1 mod ${n}\n(Dihitung menggunakan Algoritma Euklides Diperluas)`;
+                }
+                break;
+        }
+
+        // Tampilkan hasil
+        resultValue.innerText = hasil;
+        calcSteps.innerText = penjelasan;
+        resultBox.style.display = "block";
+    }
+</script>
+
+</body>
+</html>
